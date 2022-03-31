@@ -9,3 +9,4 @@ class AI(Player):
     def choose_gesture(self):
         self.choose_gesture = random.randint(0,4)
         print(f'{self.name} has picked {self.gesture_list[self.choose_gesture]}')
+        
