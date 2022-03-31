@@ -11,6 +11,9 @@ class Human(Player):
             print(f'Press {i} to select {gesture}')
             i += 1
             sleep(1)
-        self.choose_gesture = input
+        self.choose_gesture = int(input("Select gesture to use for the round. "))
         sleep(1)
         print(f'{self.name} has picked {self.gesture_list[self.choose_gesture]}')
+
+human1 = Human('Human1')
+human1.choose_gesture()
