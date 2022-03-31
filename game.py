@@ -8,6 +8,10 @@ class Game():
         self.rules_list = ['Rock crushes Scissors', 'Scissors cuts Paper', 'Paper covers Rock', 'Rock crushes Lizard', 'Lizard poisons Spock',
                             'Spock smashes Scissors', 'Scissors decapitates Lizard', 'Lizard eats Paper']
 
+    def run_game(self):
+        self.display_welcome()
+        self.choose_players()
+
     def display_welcome(self):
         print('\nWelcome to Rock, Paper, Scissor, Lizard, Spock.\n')
         sleep(1)
@@ -16,6 +20,7 @@ class Game():
         print('Number keys will be used to make gesture selections.\n')
         sleep(1)
         print('Rules of the game.')
+        sleep(1)
         for rule in self.rules_list:
             print(rule)
             sleep(1)
@@ -36,3 +41,5 @@ class Game():
             self.player1 = AI('NPC1')
             self.player2 = AI('NPC2')
 
+game = Game()
+game.run_game()
