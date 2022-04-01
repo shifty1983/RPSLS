@@ -1,5 +1,3 @@
-from math import gamma
-from operator import ge
 from human import Human
 from ai import AI
 from time import sleep
@@ -12,7 +10,11 @@ class Game():
     def run_game(self):
         self.display_welcome()
         self.choose_players()
-        self.round()
+        run_game = True
+        while run_game == True:
+            self.round()
+            if self.player1.score == 2 or self.player2.score == 2:
+                run_game = False
 
     def display_welcome(self):
         print('\nWelcome to Rock, Paper, Scissor, Lizard, Spock.\n')
@@ -72,6 +74,12 @@ class Game():
         sleep(1)
         print(f'{self.player1.name} score is {self.player1.score}')
         print(f'{self.player2.name} score is {self.player2.score}\n')  
+
+    def display_winner(self):
+        if self.player1.score == 2:
+            print(f'{self.player1.name} is the winner!')
+        elif self.player2.score == 2:
+            print(f'{self.player2.name} is the winner!')
             
 
 game = Game()
