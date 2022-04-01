@@ -30,7 +30,17 @@ class Game():
             print(rule)
     
     def choose_players(self):
-        self.number_of_players = int(input("\nHow many players? 1, 2, or 3 for a suprise. "))
+        while True:
+            self.number_of_players = input("\nHow many players? 1, 2, or 3 for a suprise. ")
+            try:
+                self.number_of_players = int(self.number_of_players)
+            except:
+                print('Please user numeric digits.')
+                continue
+            if self.number_of_players < 1 or self.number_of_players > 3:
+                print('Please enter a number between 1 and 3.')
+                continue
+            break
         print()
         if self.number_of_players == 1:
             name = input('Player 1 enter your name: ')
