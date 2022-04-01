@@ -12,5 +12,5 @@ class Human(Player):
             i += 1
             sleep(1)
         self.choose_gesture = int(input("Select gesture to use for the round. "))
-        sleep(1)
-        print(f'{self.name} has picked {self.gesture_list[self.choose_gesture]}')
+        print()
+        print(f'{self.name} has picked {self.gesture_list[self.choose_gesture]}\n')
