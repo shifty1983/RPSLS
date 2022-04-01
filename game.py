@@ -2,6 +2,7 @@ from human import Human
 from ai import AI
 from time import sleep
 
+
 class Game():
     def __init__(self):
         self.rules_list = ['Rock crushes Scissors', 'Scissors cuts Paper', 'Paper covers Rock', 'Rock crushes Lizard', 'Lizard poisons Spock',
@@ -10,11 +11,12 @@ class Game():
     def run_game(self):
         self.display_welcome()
         self.choose_players()
-        run_game = True
-        while run_game == True:
-            self.round()
+        run = True
+        while run == True:
+            self.game()
             if self.player1.score == 2 or self.player2.score == 2:
-                run_game = False
+                run = False
+        self.display_winner()
 
     def display_welcome(self):
         print('\nWelcome to Rock, Paper, Scissor, Lizard, Spock.\n')
@@ -42,45 +44,44 @@ class Game():
         elif self.number_of_players == 3:
             self.player1 = AI('NPC1')
             self.player2 = AI('NPC2')
+        return(self.player1, self.player2)
 
-    def round(self):
-        print()
-        round = True
-        while round == True:
+    def game(self):
             self.player1_choice = self.player1.choose_gesture()
             self.player2_choice = self.player2.choose_gesture()
-            if self.player1_choice != self.player2_choice:
-                round = False
-            else:
-                print("There's no ties replay the round.")
-        self.round_outcome(self.player1_choice, self.player2_choice)
+            print(f'{self.player1.name} has picked {self.player1.gesture_list[self.player1_choice]}')
+            print(f'{self.player2.name} has picked {self.player2.gesture_list[self.player2_choice]}\n')
+            sleep(1)
+            self.game_outcome(self.player1_choice, self.player2_choice)
 
-    
-    def round_outcome(self, gesture1, gesture2):
-        if ((gesture1 == 0  and (gesture2 == 2 or gesture2 == 3)) or
-            (gesture1 == 1  and (gesture2 == 0 or gesture2 == 4)) or 
-            (gesture1 == 2  and (gesture2 == 1 or gesture2 == 3)) or 
-            (gesture1 == 3  and (gesture2 == 1 or gesture2 == 4)) or 
-            (gesture1 == 4  and (gesture2 == 0 or gesture2 == 2))):
+    def game_outcome(self, gesture1, gesture2):
+        if gesture1 == gesture2:
+            print('There are no ties play again.')
+        elif ((gesture1 == 0  and (gesture2 == 2 or gesture2 == 3)) or
+              (gesture1 == 1  and (gesture2 == 0 or gesture2 == 4)) or 
+              (gesture1 == 2  and (gesture2 == 1 or gesture2 == 3)) or 
+              (gesture1 == 3  and (gesture2 == 1 or gesture2 == 4)) or 
+              (gesture1 == 4  and (gesture2 == 0 or gesture2 == 2))):
                 print(f'{self.player1.gesture_list[gesture1]} beats {self.player2.gesture_list[gesture2]}, {self.player1.name} wins the round!\n')
                 self.player1.score += 1
-        if ((gesture2 == 0  and (gesture1 == 2 or gesture1 == 3)) or
-            (gesture2 == 1  and (gesture1 == 0 or gesture1 == 4)) or 
-            (gesture2 == 2  and (gesture1 == 1 or gesture1 == 3)) or 
-            (gesture2 == 3  and (gesture1 == 1 or gesture1 == 4)) or 
-            (gesture2 == 4  and (gesture1 == 0 or gesture1 == 2))):
+        elif ((gesture2 == 0  and (gesture1 == 2 or gesture1 == 3)) or
+              (gesture2 == 1  and (gesture1 == 0 or gesture1 == 4)) or 
+              (gesture2 == 2  and (gesture1 == 1 or gesture1 == 3)) or 
+              (gesture2 == 3  and (gesture1 == 1 or gesture1 == 4)) or 
+              (gesture2 == 4  and (gesture1 == 0 or gesture1 == 2))):
                 print(f'{self.player2.gesture_list[gesture2]} beats {self.player1.gesture_list[gesture1]}, {self.player2.name} wins the round!\n')
                 self.player2.score += 1
         sleep(1)
         print(f'{self.player1.name} score is {self.player1.score}')
-        print(f'{self.player2.name} score is {self.player2.score}\n')  
+        print(f'{self.player2.name} score is {self.player2.score}\n')
+        sleep(1)
+
 
     def display_winner(self):
         if self.player1.score == 2:
             print(f'{self.player1.name} is the winner!')
         elif self.player2.score == 2:
             print(f'{self.player2.name} is the winner!')
-            
-
-game = Game()
-game.run_game()
+if __name__ == "__main__":
+    game = Game()
+    game.run_game()

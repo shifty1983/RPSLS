@@ -1,5 +1,5 @@
 from player import Player
-from time import sleep
+import getpass
 
 class Human(Player):
     def __init__(self, name):
@@ -10,8 +10,5 @@ class Human(Player):
         for gesture in self.gesture_list:
             print(f'Press {i} to select {gesture}')
             i += 1
-        self.choose_gesture = int(input("Select gesture to use for the round. "))
-        print()
-        print(f'{self.name} has picked {self.gesture_list[self.choose_gesture]}\n')
-        sleep(1)
-        return(self.choose_gesture)
+        self.gesture = int(getpass.getpass("Select gesture to use for the round. "))
+        return(self.gesture)
